@@ -1,0 +1,50 @@
+<div class="m-player">
+    <div class="lock">
+        <div class="left">
+            <i></i>
+        </div>
+    </div>
+    <div class="hand"></div>
+    <div class="container">
+        <div class="wrap">
+            <div class="btns">
+                <i class="prev"></i>
+                <i class="toggle"></i>
+                <i class="next"></i>
+            </div>
+            <div class="head">
+                <img src="" alt="">
+                <i class="mask"></i>
+            </div>
+            <div class="play">
+                <div class="words clearfix ">
+                    <p class="ellipsis margin-bottom-none">歌名</p>
+                    <ul class="songs clearfix margin-bottom-none">
+                        <li>歌手1</li>
+                        <li>歌手2</li>
+                    </ul>
+                </div>
+            <div class="bar">
+                <div class="slider-wrap">
+                    <app-wy-slider [bufferOffset]="bufferOffset" [(ngModel)]="sliderValue" ></app-wy-slider>
+                </div>
+                <span class="time"><em>02:30</em></span>{{sliderValue}}
+            </div>
+        </div>
+            <div class="oper">
+                <i class="like">收藏</i>
+                <i class="share">分享</i>
+            </div>
+            <div class="ctrl">
+                <i class="volume">音量</i>
+                <i class="loop">循环</i>
+                 <p class="open">
+                     <span>面板</span>
+                 </p>
+                 <div class="control-vol">
+                     <app-wy-slider [wyVertical] = 'true'></app-wy-slider>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>

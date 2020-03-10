@@ -1,2 +1,55 @@
-<!-- NG-ZORRO -->
-<h1>Hello</h1>
+<div id="app">
+    <nz-layout class="layout">
+        <nz-header class="header">
+            <div class="wrap">
+                <div class="left">
+                    <h1>Music</h1>
+                    <ul nz-menu nzTheme="dark" nzMode="horizontal">
+                        <li nz-menu-item>发现</li>
+                        <li nz-menu-item>歌单</li>
+                    </ul>
+                </div>
+                <div class="reght">
+                    <div class="search">
+                        <nz-input-group [nzPrefix]="suffixIconSearch" >
+                          <input nz-input  placeholder="歌单/歌曲/歌手">
+                        </nz-input-group>
+                        <ng-template #suffixIconSearch>
+                            <i nz-icon type="search"></i>
+                        </ng-template>
+                    </div>
+                </div>
+                <div class="member">
+                    <div class="no-login">
+                        <ul nz-menu nzTheme="dark" nzMode="horizontal">
+                            <li nz-submenu>
+                                <div title>
+                                    <span>登录</span>
+                                    <i nz-icon type='down' nzTheme="outline"></i>
+                                </div>
+                                <ul>
+                                    <li  nz-menu-item>
+                                        <i nz-icon type="mobile" nzTheme="outline"></i>
+                                        手机登录
+                                    </li>
+                                    <li  nz-menu-item>
+                                        <i nz-icon type="user-add" nzTheme="outline"></i>
+                                        注册
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nz-header>
+        <nz-content class="content">
+            <router-outlet></router-outlet>
+        </nz-content>
+        <nz-footer class="footer">
+            vpvip @2019 Implement by Angular
+        </nz-footer>
+    </nz-layout>  
+</div>
+
+<app-wy-player></app-wy-player>

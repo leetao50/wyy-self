@@ -1,0 +1,69 @@
+
+<div class="home">
+    <app-wy-carousel #wycarousel 
+    (changeSlide)="onChangeSlide($event)"
+    [activeIndex]=indexNumber  >
+        <nz-carousel
+          nzEffect="fade"
+           [nzDotRender]=wycarousel.dotRef
+            (nzBeforeChange)="onBeforeChange($event)"
+           nzAutoPlay="true">
+         <div class="carousel-item" nz-carousel-content *ngFor="let item of banners">
+            <img [src]="item.imageUrl">
+         </div>
+        </nz-carousel>
+    </app-wy-carousel>
+    <div class="main"> 
+      <div class="wrap">
+        <div class="left">
+          <div class="sec">
+            <div class="up">
+              <div class="navs">
+                <h2>
+                  <i></i>
+                  <a>热门标签</a>
+                </h2>
+                <nav>
+                  <a *ngFor="let item of hotTags">{{item.name}}</a>
+                </nav>
+              </div>
+              <a>
+                更多
+                <i nz-icon nzType="arrow-right" nzTheme="outline"></i>
+              </a>
+            </div>
+            <div class="down">
+              <div class="down-wrap">
+                <app-single-sheet
+                *ngFor="let item of songSheet"
+                [sheet]=item
+                (onPlay)="onPlaySheet($event)"
+                class="sheet-item">
+
+                </app-single-sheet>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="right">
+          <app-member-card></app-member-card> 
+          <div class="settled-singer">
+            <div class="tit">
+              <b>入驻歌手</b>
+            </div>
+            <div class="list">
+              <div class="card" *ngFor="let item of singers" >
+                <div class="pic">
+                  <img [src]="item.picUrl" [alt]="item.name">
+                </div>
+                <div class="txt">
+                  <b class="ellipsis">{{item.name}}</b>
+                  <span>{{item.albumSize}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
