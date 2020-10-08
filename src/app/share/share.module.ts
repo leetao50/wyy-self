@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { WyUiModule } from './wy-ui/wy-ui.module';
 
 @NgModule({
-  declarations: [],
+
   imports: [
     NgZorroAntdModule,
     FormsModule,

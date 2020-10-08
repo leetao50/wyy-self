@@ -30,6 +30,8 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
   private sliderDom: HTMLDivElement;
   @Output() changeblur: EventEmitter<any> = new EventEmitter();
 
+  @Output() wyOnAfterChange = new EventEmitter<SliderValue>();
+
   @ViewChild('wySlider', { static: true } ) private wySlider: ElementRef;
 
   private dragStart$: Observable<number>;
@@ -85,7 +87,7 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
   }
 
   private onDragStart(value: number) {
-    console.log('start value:' + value);
+    //console.log('start value:' + value);
     this.setValue(value);
     this.cdr.markForCheck();
     this.toggleDragMoving(true);
@@ -93,13 +95,14 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
 
   private onDragMove(value: number) {
     if (this.isDragging) {
-      console.log('moving ' + value);
+      //console.log('moving ' + value);
       this.setValue(value);
       this.cdr.markForCheck();
     }
   }
 
   private onDragEnd() {
+    this.wyOnAfterChange.emit(this.value);
     this.toggleDragMoving(false);
     this.cdr.markForCheck();
 
@@ -114,7 +117,7 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
   }
   private updateTrackAndHandles() {
     this.offset = this.getValueOffset(this.value);
-    console.log('offset' + this.offset);
+    //console.log('offset' + this.offset);
     this.cdr.markForCheck();
   }
 
@@ -200,7 +203,7 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
   }
 
   private onValueChange(value: SliderValue): void {
-    console.log(value);
+    //console.log(value);
     this.changeblur.emit(value);
   }
   private onTouched() {}

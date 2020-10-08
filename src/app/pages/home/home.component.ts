@@ -4,6 +4,11 @@ import { NzCarouselComponent } from 'ng-zorro-antd';
 import { Banner, HotTag, SongSheet, Singer } from 'src/app/services/data-types/common.types';
 import { SingerService } from 'src/app/services/singer.service';
 import { SheetService } from 'src/app/services/sheet.service';
+import { AppStoreModule } from 'src/app/store';
+import { select, Store } from '@ngrx/store';
+import { SetCurrentIndex, SetPlaying, SetPlayList, SetSongList } from 'src/app/store/actions/player.actions';
+import { PlayState } from 'src/app/store/reducers/player.reducer';
+import { findIndex, shuffle } from 'src/app/utils/array';
 
 @Component({
   selector: 'app-home',
@@ -16,9 +21,15 @@ export class HomeComponent implements OnInit {
   songSheet:SongSheet[];
   singers:Singer[];
 
+  playerState:PlayState;
+
   @ViewChild(NzCarouselComponent,{static:false})  carousel:NzCarouselComponent;
 
-  constructor(private homeService:HomeService,private singerService:SingerService,private sheetService:SheetService) {
+  constructor(private homeService:HomeService,
+    private singerService:SingerService,
+    private sheetService:SheetService,
+    private store$: Store<AppStoreModule>
+    ) {
     this.getBananers();
 
     this.getHotTags();
@@ -27,6 +38,7 @@ export class HomeComponent implements OnInit {
 
     this.getEnterSinger();
 
+    this.store$.pipe(select('player')).subscribe(res=> this.playerState = res)
    }
 
    getEnterSinger(){
@@ -69,9 +81,20 @@ export class HomeComponent implements OnInit {
    }
 
    onPlaySheet(id:number){
-     console.log(id);
-     this.sheetService.playSheet(id).subscribe(rec=>{
-       console.log('rec',rec);
+    
+     this.sheetService.playSheet(id).subscribe(list=>{
+
+       this.store$.dispatch(SetSongList({songList: list }));
+
+       let trueIndex = 0;
+       let trueList = list.slice();
+       if(this.playerState.playMode.type === 'random'){
+         trueList =  shuffle(list||[]);
+         trueIndex =findIndex(trueList,list[trueIndex]);
+       }
+
+       this.store$.dispatch(SetPlayList({playList: trueList }));
+       this.store$.dispatch(SetCurrentIndex({currentIndex: trueIndex }));
      })
    }
 

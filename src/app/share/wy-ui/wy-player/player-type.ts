@@ -1,4 +1,4 @@
 export type PlayMode = {
-    type: 'loop' | 'random' | 'singleloop';
-    label: '循环' | '随机' | '单曲循环'
+    type: 'loop' | 'random' | 'singleloop',
+    lable: '循环' | '随机' | '单曲循环'
 }
