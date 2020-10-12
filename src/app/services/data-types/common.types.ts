@@ -1,3 +1,4 @@
+import { type } from 'os'
 
 export type Banner = {
     targetId:number;
@@ -44,6 +45,11 @@ export type Song = {
 export type SongUrl = {
     id:number;
     url:string;
+}
+
+export type Lyric ={
+    lyric:string;
+    tlyric:string;
 }
 
 

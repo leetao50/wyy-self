@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { ServicesModule, API_CONFIG } from './services.module';
 import { Observable, from, observable } from 'rxjs';
-import { Singer, HotTag, SongSheet, SongUrl, Song } from './data-types/common.types';
+import { Singer, HotTag, SongSheet, SongUrl, Song, Lyric } from './data-types/common.types';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/internal/operators';
 import queryString from 'query-string';
@@ -34,6 +34,18 @@ export class SongService {
           }
       });
       return result;
+  }
+
+  getLyric(id: number): Observable<Lyric>{
+    const params = new HttpParams().set('id',id.toString());
+    return this.http.get(this.url + 'lyric',{params})
+    .pipe(map((res: { [key:string] : { lyric:string; } } )=> {
+        return {
+          lyric: res.lrc.lyric,
+          tlyric: res.tlyric.lyric,
+        }
+      })
+    );
   }
 
 }
