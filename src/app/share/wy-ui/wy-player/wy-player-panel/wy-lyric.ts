@@ -98,4 +98,8 @@ export class WyLyric{
             }
         } 
     }
+
+    play(startTime=0){
+
+    }
 }

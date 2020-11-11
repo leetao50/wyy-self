@@ -13,6 +13,7 @@ import { BaseLyricLine, WyLyric } from './wy-lyric';
 })
 export class WyPlayerPanelComponent implements OnInit,OnChanges {
 
+  @Input() playing:boolean;
   @Input() songList:Song[];
   @Input() currentSong:Song;
   @Input() currentIndex:number;
@@ -65,6 +66,9 @@ export class WyPlayerPanelComponent implements OnInit,OnChanges {
       this.currentLyric = lyric.lines;
       console.log('lines:',this.currentLyric);
       this.wyScroll.last.scrollTo(0,0);
+      if(this.playing){
+        lyric.play();
+      }
 
     }); 
   }
